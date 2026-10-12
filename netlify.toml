@@ -1,0 +1,20 @@
+# Configuração do Netlify para o aplicativo hospedado (login pelo Supabase Auth).
+[build]
+  command = "npm run build:site"   # só empacota; a checagem de tipos roda com `npm run check`
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+# Aplicativo de página única: qualquer endereço abre o index.html.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    X-Frame-Options = "DENY"
